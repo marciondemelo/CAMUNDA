@@ -1,6 +1,5 @@
 spring.datasource.driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 spring.datasource.url: jdbc:sqlserver://NOTEL340;databaseName=CAMUNDANEW
-//spring.datasource.url: jdbc:sqlserver://192.168.15.10:1433;databaseName=CAMUNDANEW
 spring.datasource.username: sa
 spring.datasource.password: sa
 spring.jpa.hibernate.ddl-auto: validate
