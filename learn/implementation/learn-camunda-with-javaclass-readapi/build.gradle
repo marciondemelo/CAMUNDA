@@ -19,7 +19,6 @@ dependencies {
     implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:7.16.0'
     implementation 'com.h2database:h2:1.4.200'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.5.4'
-    implementation 'org.projectlombok:lombok:1.18.20'
     implementation 'org.testng:testng:7.1.0'
 }
 

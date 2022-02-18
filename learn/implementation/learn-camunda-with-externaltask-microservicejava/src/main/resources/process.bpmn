@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <bpmn:process id="process-javaclass" name="Process Java Class" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="cadastro" />
+    <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="cadastro" targetRef="calculo" />
+    <bpmn:userTask id="cadastro" name="Cadastro" camunda:formKey="" camunda:candidateUsers="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="estado" label="Estado" type="enum">
+            <camunda:value id="sp" name="SP" />
+            <camunda:value id="rj" name="RJ" />
+            <camunda:value id="mg" name="MG" />
+            <camunda:value id="es" name="ES" />
+          </camunda:formField>
+          <camunda:formField id="valor" label="Valor financiado" type="long" />
+          <camunda:formField id="quantidademeses" label="Quantidade Meses" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16gzt2m</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="calculo" name="Calculo" camunda:class="com.example.workflow.event.ValorTotalJurosMesDelegate">
+      <bpmn:incoming>SequenceFlow_16gzt2m</bpmn:incoming>
+      <bpmn:outgoing>Flow_17itr6l</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_17itr6l" sourceRef="calculo" targetRef="Activity_1lvy7zs" />
+    <bpmn:endEvent id="Event_0toxwtq">
+      <bpmn:incoming>Flow_0hhmbiz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0hhmbiz" sourceRef="Activity_1lvy7zs" targetRef="Event_0toxwtq" />
+    <bpmn:userTask id="Activity_1lvy7zs" name="Total">
+      <bpmn:incoming>Flow_17itr6l</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hhmbiz</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="process-javaclass">
+      <bpmndi:BPMNEdge id="SequenceFlow_16gzt2m_di" bpmnElement="SequenceFlow_16gzt2m">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="460" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17itr6l_di" bpmnElement="Flow_17itr6l">
+        <di:waypoint x="560" y="117" />
+        <di:waypoint x="650" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hhmbiz_di" bpmnElement="Flow_0hhmbiz">
+        <di:waypoint x="750" y="117" />
+        <di:waypoint x="842" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="cadastro">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1w6ayc0_di" bpmnElement="calculo">
+        <dc:Bounds x="460" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0toxwtq_di" bpmnElement="Event_0toxwtq">
+        <dc:Bounds x="842" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xilon0_di" bpmnElement="Activity_1lvy7zs">
+        <dc:Bounds x="650" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

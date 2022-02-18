@@ -1,7 +1,5 @@
 package com.example.workflow;
 
-import lombok.Data;
-
 public class Taxa {
     private double valor;
 
