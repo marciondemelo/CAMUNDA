@@ -1,0 +1,64 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/sp"
+      },
+      "response": {
+        "status": 200,
+		"jsonBody":{
+			"valor": 0.009
+        },
+	    "headers": {
+			"Content-Type": "application/json"
+	    }
+	  }
+	},
+	{
+      "request": {
+        "method": "GET",
+        "url": "/rj"
+      },
+      "response": {
+        "status": 200,
+		"jsonBody":{
+			"valor": 0.015
+        },
+	    "headers": {
+			"Content-Type": "application/json"
+	    }
+	  }
+	},
+	{
+      "request": {
+        "method": "GET",
+        "url": "/es"
+      },
+      "response": {
+        "status": 200,
+		"jsonBody":{
+			"valor": 0.005
+        },
+	    "headers": {
+			"Content-Type": "application/json"
+	    }
+	  }
+	},
+	{
+      "request": {
+        "method": "GET",
+        "url": "/mg"
+      },
+      "response": {
+        "status": 200,
+		"jsonBody":{
+			"valor": 0.01
+        },
+	    "headers": {
+			"Content-Type": "application/json"
+	    }
+	  }
+	}
+  ]
+}
