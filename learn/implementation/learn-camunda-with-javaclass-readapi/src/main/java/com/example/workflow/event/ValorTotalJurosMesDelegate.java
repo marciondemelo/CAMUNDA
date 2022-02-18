@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class ValorTotalJurosMesDelegate implements JavaDelegate {
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
         String estado = execution.getVariable("estado").toString();
         long principal = (long) execution.getVariable("valor");
         double taxa = taxaJurosPorEstado(estado);
@@ -23,7 +23,6 @@ public class ValorTotalJurosMesDelegate implements JavaDelegate {
     }
 
     public double taxaJurosPorEstado(String estado) {
-
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         RestTemplate restTemplate = restTemplateBuilder.build();
 
