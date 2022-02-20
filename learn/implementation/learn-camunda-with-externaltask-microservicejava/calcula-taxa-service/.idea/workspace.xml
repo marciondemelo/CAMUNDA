@@ -5,34 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="803df804-5810-46d4-ad2b-0f701011b423" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/dependencies-accessors/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/7.1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/classes/java/main/com/example/workflow/Application.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/classes/java/main/com/example/workflow/Taxa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/classes/java/main/com/example/workflow/event/ValorTotalJurosMesDelegate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/libs/learn-camunda-with-javaclass-readapi-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/resources/main/application.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/resources/main/process.bpmn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/src/main/resources/process.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/src/main/resources/process.bpmn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../learn-camunda-with-connector/src/main/java/com/example/workflow/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../learn-camunda-with-connector/src/main/resources/process.bpmn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../learn-camunda-with-connector/wiremock/mappings/taxaporestado.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../learn-camunda-with-javaclass-readapi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
