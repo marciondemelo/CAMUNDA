@@ -5,7 +5,7 @@
       <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="cadastro" />
-    <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="cadastro" targetRef="calculo" />
+    <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="cadastro" targetRef="Gateway_006z7kl" />
     <bpmn:userTask id="cadastro" name="Cadastro" camunda:formKey="" camunda:candidateUsers="demo">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -22,52 +22,121 @@
       <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_16gzt2m</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="calculo" name="Calculo" camunda:class="com.example.workflow.event.ValorTotalJurosMesDelegate">
-      <bpmn:incoming>SequenceFlow_16gzt2m</bpmn:incoming>
+    <bpmn:serviceTask id="calculodelegate" name="Calculo delegate" camunda:delegateExpression="#{calculaBear}">
+      <bpmn:incoming>Flow_08b8rr1</bpmn:incoming>
       <bpmn:outgoing>Flow_17itr6l</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_17itr6l" sourceRef="calculo" targetRef="Activity_1lvy7zs" />
+    <bpmn:sequenceFlow id="Flow_17itr6l" sourceRef="calculodelegate" targetRef="Gateway_0deoktn" />
     <bpmn:endEvent id="Event_0toxwtq">
       <bpmn:incoming>Flow_0hhmbiz</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0hhmbiz" sourceRef="Activity_1lvy7zs" targetRef="Event_0toxwtq" />
     <bpmn:userTask id="Activity_1lvy7zs" name="Total">
-      <bpmn:incoming>Flow_17itr6l</bpmn:incoming>
+      <bpmn:incoming>Flow_1cxf1h2</bpmn:incoming>
       <bpmn:outgoing>Flow_0hhmbiz</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_006z7kl" default="Flow_0vfxttw">
+      <bpmn:incoming>SequenceFlow_16gzt2m</bpmn:incoming>
+      <bpmn:outgoing>Flow_08b8rr1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0vfxttw</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_08b8rr1" sourceRef="Gateway_006z7kl" targetRef="calculodelegate">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${estado == "sp" || estado == "rj"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_0deoktn">
+      <bpmn:incoming>Flow_17itr6l</bpmn:incoming>
+      <bpmn:incoming>Flow_13kutm0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rjz1af</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0rjz1af" sourceRef="Gateway_0deoktn" targetRef="calculaparcelas" />
+    <bpmn:sequenceFlow id="Flow_0vfxttw" sourceRef="Gateway_006z7kl" targetRef="calculoclass" />
+    <bpmn:serviceTask id="calculoclass" name="calculo class" camunda:class="com.example.workflow.event.ValorTotalJurosMesDelegate">
+      <bpmn:incoming>Flow_0vfxttw</bpmn:incoming>
+      <bpmn:outgoing>Flow_13kutm0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_13kutm0" sourceRef="calculoclass" targetRef="Gateway_0deoktn" />
+    <bpmn:sequenceFlow id="Flow_1cxf1h2" sourceRef="calculaparcelas" targetRef="Activity_1lvy7zs" />
+    <bpmn:scriptTask id="calculaparcelas" name="Calcula parcelas (script)" scriptFormat="Javascript">
+      <bpmn:incoming>Flow_0rjz1af</bpmn:incoming>
+      <bpmn:outgoing>Flow_1cxf1h2</bpmn:outgoing>
+      <bpmn:script>var valorTotal = execution.getVariable("valortotal")
+var quantidadeMeses = execution.getVariable("quantidademeses")
+
+var valorParcela = (valorTotal.replace(',', '.') / quantidadeMeses)
+
+
+execution.setVariable("valorParcela", valorParcela.toFixed(2).replace('.', ',') )
+</bpmn:script>
+    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="process-javaclass">
-      <bpmndi:BPMNEdge id="SequenceFlow_16gzt2m_di" bpmnElement="SequenceFlow_16gzt2m">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="460" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
+      <bpmndi:BPMNEdge id="Flow_0hhmbiz_di" bpmnElement="Flow_0hhmbiz">
+        <di:waypoint x="940" y="187" />
+        <di:waypoint x="992" y="187" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_17itr6l_di" bpmnElement="Flow_17itr6l">
-        <di:waypoint x="560" y="117" />
-        <di:waypoint x="650" y="117" />
+        <di:waypoint x="550" y="120" />
+        <di:waypoint x="600" y="120" />
+        <di:waypoint x="600" y="162" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hhmbiz_di" bpmnElement="Flow_0hhmbiz">
-        <di:waypoint x="750" y="117" />
-        <di:waypoint x="842" y="117" />
+      <bpmndi:BPMNEdge id="SequenceFlow_16gzt2m_di" bpmnElement="SequenceFlow_16gzt2m">
+        <di:waypoint x="350" y="187" />
+        <di:waypoint x="375" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="215" y="187" />
+        <di:waypoint x="250" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08b8rr1_di" bpmnElement="Flow_08b8rr1">
+        <di:waypoint x="400" y="162" />
+        <di:waypoint x="400" y="120" />
+        <di:waypoint x="450" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rjz1af_di" bpmnElement="Flow_0rjz1af">
+        <di:waypoint x="625" y="187" />
+        <di:waypoint x="670" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vfxttw_di" bpmnElement="Flow_0vfxttw">
+        <di:waypoint x="400" y="212" />
+        <di:waypoint x="400" y="280" />
+        <di:waypoint x="450" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13kutm0_di" bpmnElement="Flow_13kutm0">
+        <di:waypoint x="550" y="280" />
+        <di:waypoint x="600" y="280" />
+        <di:waypoint x="600" y="212" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cxf1h2_di" bpmnElement="Flow_1cxf1h2">
+        <di:waypoint x="770" y="187" />
+        <di:waypoint x="840" y="187" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <dc:Bounds x="179" y="169" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="cadastro">
-        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <dc:Bounds x="250" y="147" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1w6ayc0_di" bpmnElement="calculo">
-        <dc:Bounds x="460" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Gateway_0deoktn_di" bpmnElement="Gateway_0deoktn" isMarkerVisible="true">
+        <dc:Bounds x="575" y="162" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1w6ayc0_di" bpmnElement="calculodelegate">
+        <dc:Bounds x="450" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_006z7kl_di" bpmnElement="Gateway_006z7kl" isMarkerVisible="true">
+        <dc:Bounds x="375" y="162" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bukjgi_di" bpmnElement="calculoclass">
+        <dc:Bounds x="450" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0toxwtq_di" bpmnElement="Event_0toxwtq">
-        <dc:Bounds x="842" y="99" width="36" height="36" />
+        <dc:Bounds x="992" y="169" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1xilon0_di" bpmnElement="Activity_1lvy7zs">
-        <dc:Bounds x="650" y="77" width="100" height="80" />
+        <dc:Bounds x="840" y="147" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ui2f8e_di" bpmnElement="calculaparcelas">
+        <dc:Bounds x="670" y="147" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
