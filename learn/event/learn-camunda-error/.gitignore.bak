@@ -1,5 +1,3 @@
-build
-.gradle
 .idea
 target
 .classpath
