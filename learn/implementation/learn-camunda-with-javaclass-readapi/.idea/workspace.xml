@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78b4d914-b204-4057-94ae-80b019c2cf8e" name="Changes" comment="refactory adicionado task delegate e task script (javascript)">
-      <change afterPath="$PROJECT_DIR$/../learn-camunda-with-connector/src/main/java/com/example/workflow/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../learn-camunda-with-connector/src/main/resources/process.bpmn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../learn-camunda-with-connector/wiremock/mappings/taxaporestado.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/java/com/example/worflow/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/java/com/example/worflow/event/Calcula.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/java/com/example/worflow/event/DoaDiferenca.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../learn-camunda-with-connector/src/main/resources/mail-config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../learn-camunda-with-externaltask-microservicejava/calcula-taxa-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-camunda-with-externaltask-microservicejava/calcula-taxa-service/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,13 +39,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="learn-camunda-with-javaclass-readapi" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="learn-camunda-with-javaclass-readapi" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
