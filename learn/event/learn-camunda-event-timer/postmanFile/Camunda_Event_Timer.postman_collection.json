@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "1772c4da-bb2d-4378-b5c8-22bd809417ce",
+		"name": "Camunda_Event_Timer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "start process",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"businessKey\" : \"123\",  \r\n  \"variables\" : {\r\n    \"vendedor\" : {\"value\" : \"Richard Gomes\", \"type\": \"String\", \r\n                    \"valueInfo\" : { \"transient\" : true }\r\n                  },\r\n    \"pedido\" : {\"value\" : \"123\", \"type\": \"String\"},\r\n    \"produto\" : {\"value\" : \"Celular\", \"type\": \"String\"},\r\n    \"valor\" : {\"value\" : \"1599.99\", \"type\": \"String\"},\r\n    \"comprador\" : {\"value\" : \"Angelo Almeida\", \"type\": \"String\"}\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/ProcessTimer/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"ProcessTimer",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

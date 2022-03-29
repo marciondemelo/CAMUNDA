@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="tabeladetaxa" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <decision id="tabelataxa" name="Tabela de taxa">
+    <decisionTable id="DecisionTable_0oornsm" hitPolicy="FIRST">
+      <input id="Input_1" camunda:inputVariable="estado">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>estado</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0mkdr2o">
+          <text>"sp","rj","mg","es"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" name="taxa" typeRef="double" />
+      <rule id="DecisionRule_005cxqe">
+        <inputEntry id="UnaryTests_19adb46">
+          <text>"sp"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10e1pzf">
+          <text>0.05</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hr4s6g">
+        <inputEntry id="UnaryTests_0yvfwwl">
+          <text>"rj"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gqma84">
+          <text>0.08</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0m7uwq9">
+        <inputEntry id="UnaryTests_1173cle">
+          <text>"mg"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yemuxa">
+          <text>0.04</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19vbfgo">
+        <inputEntry id="UnaryTests_1edxspk">
+          <text>"es"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06socaw">
+          <text>0.02</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="tabelataxa">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -5,13 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78b4d914-b204-4057-94ae-80b019c2cf8e" name="Changes" comment="refactory adicionado task delegate e task script (javascript)">
-      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/java/com/example/worflow/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/java/com/example/worflow/event/Calcula.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/java/com/example/worflow/event/DoaDiferenca.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-error/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../learn-camunda-with-connector/src/main/resources/mail-config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learn-camunda-with-externaltask-microservicejava/calcula-taxa-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-camunda-with-externaltask-microservicejava/calcula-taxa-service/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/src/main/java/workflow/event/MessageSubprocessoParcelado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/src/main/java/workflow/event/ValorTotalJurosMesDelegate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-timer/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-timer/src/main/java/workflow/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-timer/src/main/java/workflow/event/LembreteEnvioDelegate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-timer/src/main/java/workflow/event/ValidaPagamentoDelegate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-timer/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn_camunda_event_message/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn_camunda_event_message/src/main/java/workflow/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../event/learn_camunda_event_message/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/camunda-h2-database.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/src/main/java/workflow/event/ValidaPagamentoDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/src/main/java/workflow/event/ValidaPagamentoDelegate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/src/main/resources/process_event.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/../../event/learn-camunda-event-time-msg/src/main/resources/process_event.bpmn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learn-camunda-with-javaclass/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../learn-camunda-with-javaclass/.idea/compiler.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +77,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dmn/learn-camunda-dmn-simple" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />

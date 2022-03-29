@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02j7oys" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ProcessTimer" name="Process Timer" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1nawb9q</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="task_transicao_solicitacao" name="Produto Solicitado">
+      <bpmn:incoming>Flow_1nawb9q</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ldstja</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1nawb9q" sourceRef="StartEvent_1" targetRef="task_transicao_solicitacao" />
+    <bpmn:sequenceFlow id="Flow_1ldstja" sourceRef="task_transicao_solicitacao" targetRef="timer_aguarda_confirm_pg" />
+    <bpmn:intermediateCatchEvent id="timer_aguarda_confirm_pg" name="Aguarda um prouco antes de passar para a task Cofirm. PG">
+      <bpmn:incoming>Flow_1ldstja</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jzqw26</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0xxnf2y">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_0jzqw26" sourceRef="timer_aguarda_confirm_pg" targetRef="servicetask_confirm_pg" />
+    <bpmn:serviceTask id="servicetask_confirm_pg" name="Confirmação de Pagamento" camunda:class="workflow.event.ValidaPagamentoDelegate">
+      <bpmn:incoming>Flow_0jzqw26</bpmn:incoming>
+      <bpmn:incoming>Flow_1n6e4dr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0oy2s9t</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_19fbb16" default="Flow_07hr5dr">
+      <bpmn:incoming>Flow_0oy2s9t</bpmn:incoming>
+      <bpmn:outgoing>Flow_07hr5dr</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0x8152g</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0oy2s9t" sourceRef="servicetask_confirm_pg" targetRef="Gateway_19fbb16" />
+    <bpmn:sequenceFlow id="Flow_07hr5dr" sourceRef="Gateway_19fbb16" targetRef="manualtask_envia_produto" />
+    <bpmn:sequenceFlow id="Flow_0x8152g" sourceRef="Gateway_19fbb16" targetRef="timer_aguardando_confirm_pg">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!pago}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:intermediateCatchEvent id="timer_aguardando_confirm_pg" name="Caso o arquivo com o numero do pedido não esteja no diretorio raiz do projeto. Aguarda um pouco e tenta novamente até o arquivo ser disponibilizado">
+      <bpmn:incoming>Flow_0x8152g</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n6e4dr</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0hac30k">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1n6e4dr" sourceRef="timer_aguardando_confirm_pg" targetRef="servicetask_confirm_pg" />
+    <bpmn:userTask id="manualtask_envia_produto" name="Envio do Produto">
+      <bpmn:incoming>Flow_07hr5dr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wlphpj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="timer_loop_lembrete_envio" name="De tempos em tempos alerta sobre a necessidade de envio do produto" cancelActivity="false" attachedToRef="manualtask_envia_produto">
+      <bpmn:outgoing>Flow_04q417f</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1k4tzl8">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT15S</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_04q417f" sourceRef="timer_loop_lembrete_envio" targetRef="servicetask_envia_lembrete" />
+    <bpmn:serviceTask id="servicetask_envia_lembrete" name="Lembrete de envio de produto" camunda:class="workflow.event.LembreteEnvioDelegate">
+      <bpmn:incoming>Flow_04q417f</bpmn:incoming>
+      <bpmn:outgoing>Flow_18dumvq</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1sao7xv">
+      <bpmn:incoming>Flow_18dumvq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_18dumvq" sourceRef="servicetask_envia_lembrete" targetRef="Event_1sao7xv" />
+    <bpmn:sequenceFlow id="Flow_1wlphpj" sourceRef="manualtask_envia_produto" targetRef="manualtask_revisao" />
+    <bpmn:userTask id="manualtask_revisao" name="Revisao">
+      <bpmn:incoming>Flow_1wlphpj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0de38iw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0gzxens">
+      <bpmn:incoming>Flow_0de38iw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0de38iw" sourceRef="manualtask_revisao" targetRef="Event_0gzxens" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ProcessTimer">
+      <bpmndi:BPMNEdge id="Flow_1nawb9q_di" bpmnElement="Flow_1nawb9q">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ldstja_di" bpmnElement="Flow_1ldstja">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="432" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jzqw26_di" bpmnElement="Flow_0jzqw26">
+        <di:waypoint x="468" y="117" />
+        <di:waypoint x="530" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oy2s9t_di" bpmnElement="Flow_0oy2s9t">
+        <di:waypoint x="630" y="117" />
+        <di:waypoint x="695" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07hr5dr_di" bpmnElement="Flow_07hr5dr">
+        <di:waypoint x="745" y="117" />
+        <di:waypoint x="810" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x8152g_di" bpmnElement="Flow_0x8152g">
+        <di:waypoint x="720" y="142" />
+        <di:waypoint x="720" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n6e4dr_di" bpmnElement="Flow_1n6e4dr">
+        <di:waypoint x="702" y="210" />
+        <di:waypoint x="580" y="210" />
+        <di:waypoint x="580" y="157" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04q417f_di" bpmnElement="Flow_04q417f">
+        <di:waypoint x="860" y="175" />
+        <di:waypoint x="860" y="320" />
+        <di:waypoint x="930" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18dumvq_di" bpmnElement="Flow_18dumvq">
+        <di:waypoint x="1030" y="320" />
+        <di:waypoint x="1092" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wlphpj_di" bpmnElement="Flow_1wlphpj">
+        <di:waypoint x="910" y="117" />
+        <di:waypoint x="980" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0de38iw_di" bpmnElement="Flow_0de38iw">
+        <di:waypoint x="1080" y="117" />
+        <di:waypoint x="1152" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_019d0z1_di" bpmnElement="task_transicao_solicitacao">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lvtllm_di" bpmnElement="timer_aguarda_confirm_pg">
+        <dc:Bounds x="432" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="411" y="142" width="79" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xtg263_di" bpmnElement="servicetask_confirm_pg">
+        <dc:Bounds x="530" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_19fbb16_di" bpmnElement="Gateway_19fbb16" isMarkerVisible="true">
+        <dc:Bounds x="695" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p3tc0g_di" bpmnElement="manualtask_envia_produto">
+        <dc:Bounds x="810" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03l18ls_di" bpmnElement="manualtask_revisao">
+        <dc:Bounds x="980" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0gzxens_di" bpmnElement="Event_0gzxens">
+        <dc:Bounds x="1152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nvf2l6_di" bpmnElement="servicetask_envia_lembrete">
+        <dc:Bounds x="930" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1sao7xv_di" bpmnElement="Event_1sao7xv">
+        <dc:Bounds x="1092" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xzt3zr_di" bpmnElement="timer_aguardando_confirm_pg">
+        <dc:Bounds x="702" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="677" y="235" width="87" height="132" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_120w8sa_di" bpmnElement="timer_loop_lembrete_envio">
+        <dc:Bounds x="842" y="139" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="879" y="182" width="82" height="66" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
