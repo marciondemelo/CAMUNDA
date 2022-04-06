@@ -7,7 +7,6 @@ plugins {
 
 group 'org.example'
 version '1.0-SNAPSHOT'
-java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
@@ -20,6 +19,7 @@ dependencies {
     implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:7.16.0'
     implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:7.16.0'
     implementation 'com.h2database:h2:1.4.200'
+    implementation 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.5.4'
 }
 

@@ -1,5 +1,6 @@
 package com.example.workflow;
 
+import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskService;

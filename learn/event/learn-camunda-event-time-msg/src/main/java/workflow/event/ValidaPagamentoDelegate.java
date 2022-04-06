@@ -3,10 +3,12 @@ package workflow.event;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import javax.inject.Named;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+@Named("ValidaPg")
 public class ValidaPagamentoDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {

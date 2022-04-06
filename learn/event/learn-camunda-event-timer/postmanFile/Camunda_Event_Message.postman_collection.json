@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "aae10243-1cca-4452-a32e-f8240cc96ac7",
+		"name": "Camunda_Event_Message",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "start event message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"messageName\" : \"message_start\",\r\n  \"businessKey\" : \"23\",  \r\n  \"processVariables\" : {\r\n    \"vendedor\" : {\"value\" : \"Richard Gomes\", \"type\": \"String\", \r\n                    \"valueInfo\" : { \"transient\" : false }\r\n                  },\r\n    \"pedido\" : {\"value\" : \"23\", \"type\": \"String\"},\r\n    \"produto\" : {\"value\" : \"Celular\", \"type\": \"String\"},\r\n    \"valor\" : {\"value\" : 1599.99, \"type\": \"Double\"},\r\n    \"comprador\" : {\"value\" : \"Angelo Almeida\", \"type\": \"String\", \r\n                    \"valueInfo\" : { \"transient\" : true }},\r\n    \"estado\": {\"value\": \"sp\", \"type\": \"String\"}\r\n  },\r\n  \"resultEnabled\" : true\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recebido - intermediate evet message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"messageName\" : \"message_recebido\",\r\n  \"businessKey\" : \"23\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "com parcela -intermediate evet message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"messageName\" : \"com_parcelamento\",\r\n  \"businessKey\" : \"23\",\r\n  \"processVariables\" : {\r\n    \"meses\" : {\"value\" : 14, \"type\": \"Long\", \r\n                    \"valueInfo\" : { \"transient\" : false }\r\n                  }\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sem parcela -intermediate evet message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"messageName\" : \"sem_parcelamento\",\r\n  \"businessKey\" : \"23\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interromper - Signal Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\" : \"finaliza_processo\",  \r\n  \"variables\" : {\r\n    \"motivo\" : {\"value\" : \"problemas no fechamento\", \"type\": \"String\", \r\n                    \"valueInfo\" : { \"transient\" : false }\r\n                  }\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/signal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"signal"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
